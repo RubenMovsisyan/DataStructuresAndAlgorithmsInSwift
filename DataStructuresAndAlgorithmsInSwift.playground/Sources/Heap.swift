@@ -49,18 +49,19 @@ public struct Heap<Element: Equatable> {
         return elements.removeLast()
     }
     
-    mutating func siftDown(from index: Int) {
+    mutating func siftDown(from index: Int, upTo count: Int? = nil) {
         var parent = index
+        let limit = count ?? self.count
         
         while true {
             let left = leftChildIndex(ofParentAt: parent)
             let right = rightChildIndex(ofParentAt: parent)
             var candidate = parent
             
-            if left < count && sort(elements[left], elements[candidate]) {
+            if left < limit && sort(elements[left], elements[candidate]) {
                 candidate = left
             }
-            if right < count && sort(elements[right], elements[candidate]) {
+            if right < limit && sort(elements[right], elements[candidate]) {
                 candidate = right
             }
             if candidate == parent {
@@ -120,3 +121,13 @@ public struct Heap<Element: Equatable> {
     }
 }
 
+extension Heap {
+    public func sorted() -> [Element] {
+        var heap = Heap(sort: sort, elements: elements)
+        for index in heap.elements.indices.reversed() {
+            heap.elements.swapAt(0, index)
+            heap.siftDown(from: 0, upTo: index)
+        }
+        return heap.elements
+    }
+}

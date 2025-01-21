@@ -400,7 +400,7 @@ func mergeSortExample() {
     print("Merge Sorted: \(mergeSort(arr))")
 }
 
-mergeSortExample()
+//mergeSortExample()
 
 func quickSortExample() {
     var arr = [8,4,10,3]
@@ -409,3 +409,25 @@ func quickSortExample() {
 }
 
 //quickSortExample()
+
+
+func radixSortExample() {
+    var arr = [88,420,1770,30]
+    print("Original: \(arr)")
+    arr.radixSort()
+    print("Radix Sorted: \(arr)")
+}
+
+//radixSortExample()
+
+func bucketSortExample() {
+    var arr = [42, -17, 0, 23, -8, 95, -100, 12, 56, 34]
+    print("Original: \(arr)")
+    arr.bucketSort()
+    print("Bucket Sorted: \(arr)")
+}
+
+//bucketSortExample()
+
+let heap = Heap(sort: >, elements: [6, 12, 2, 26, 8, 18, 21, 5, 9])
+print(heap.sorted())
