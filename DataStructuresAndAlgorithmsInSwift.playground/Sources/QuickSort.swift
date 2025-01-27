@@ -29,3 +29,31 @@ public func quickSort<Element>(_ array: [Element]) -> [Element] where Element: C
     return mutableArray
 }
 
+public func quicksortDutchFlag<T: Comparable>(_ array: inout [T], low: Int, high: Int) {
+    if low < high {
+        let (middleFirst, middleLast) = partisioningDutchFlag(&array, low: low, high: high)
+        quicksortDutchFlag(&array, low: low, high: middleFirst - 1)
+        quicksortDutchFlag(&array, low: middleLast + 1, high: high)
+    }
+}
+
+private func partisioningDutchFlag<T: Comparable>(_ array: inout [T], low: Int, high: Int) -> (Int, Int) {
+    var pivot = array[low]
+    var smaller = low
+    var equal = low + 1
+    var larger = high
+    
+    while equal <= larger {
+        if array[equal] < pivot {
+            array.swapAt(equal, smaller)
+            smaller += 1
+            equal += 1
+        } else if array[equal] > pivot {
+            array.swapAt(equal, larger)
+            larger -= 1
+        } else {
+            equal += 1
+        }
+    }
+    return (smaller, larger)
+}
