@@ -464,6 +464,17 @@ func adjacencyListExample() {
     for edge in graph.edges(from: sanFrancisco) {
         print("from: \(edge.source) to: \(edge.destination)")
     }
+    
+    let verticesBFS = graph.breadthFirstSearch(from: singapore)
+    print("\n Graph in BFS")
+    verticesBFS.forEach { vertex in
+        print(vertex)
+    }
+    print("\n Graph in DFS")
+    let verticesDFS = graph.depthFirstSearch(from: singapore)
+    verticesDFS.forEach { vertex in
+        print(vertex)
+    }
 }
 
 adjacencyListExample()

@@ -83,6 +83,7 @@ public struct QueueDoubleStack<T>: Queue {
         return !leftStack.isEmpty ? leftStack.last : rightStack.first
     }
     
+    @discardableResult
     public mutating func enqueue(_ element: T) -> Bool {
         rightStack.append(element)
         return true
